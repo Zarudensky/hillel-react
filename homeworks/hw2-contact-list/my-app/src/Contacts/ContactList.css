@@ -1,0 +1,21 @@
+.titles {
+	display: flex;
+	height: 60px;
+	background: #20232a;
+}
+.titles.fixed {
+	position: fixed;
+	top: 0;
+	width: calc(100% - 80px);
+	z-index: 9;
+}
+.titles .title {
+	width: 25%;
+	font-size: 20px;
+}
+.contacts {
+	background: #32363e;
+}
+.contacts.correct {
+	margin-top: 60px;
+}

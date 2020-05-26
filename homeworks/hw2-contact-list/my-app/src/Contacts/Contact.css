@@ -1,0 +1,24 @@
+.contact {
+  display: flex;
+  align-items: center;
+  padding: 5px 0;
+}
+.contact:hover {
+  background: #444b52;
+}
+.contact:first-child {
+  padding: 10px 0 5px;
+}
+.contact:last-child {
+  padding: 5px 0 10px;
+}
+.contact__block {
+  width: 25%;
+  padding-left: 20px;
+}
+.contact .btn {
+  width: calc(50% - 5px);
+} 
+.btn__edit {
+  margin-right: 10px;
+}

@@ -1,0 +1,23 @@
+.header {
+  display: flex;
+	justify-content: flex-end;
+	padding: 60px 40px 0;
+}
+.title__main {
+	font-size: 34px;
+	color: #60dbfb;
+	padding: 0;
+	margin-right: auto;
+}
+.btn__add {
+	position: fixed;
+	width: calc(25% - 40px);
+	text-transform: uppercase;
+	float: right;
+	background: #fff;
+	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.32);
+	z-index: 9;
+}
+.btn__add:hover {
+	background: #60dbfb;
+}

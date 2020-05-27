@@ -7,10 +7,6 @@ export default class Header extends React.Component {
     modal: false,
   }
 
-  getContactToHeader = (e) => {
-    this.props.transferContactToContacts(e);
-  }
-
   showModal = () => {
     this.setState({modal: !this.state.modal});
   }

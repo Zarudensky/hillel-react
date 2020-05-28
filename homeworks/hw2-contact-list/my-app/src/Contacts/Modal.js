@@ -3,18 +3,20 @@ import './Modal.css';
 
 export default class Modal extends React.Component {
 	state = {
-		nameValueForm: '',
-		surnameValueForm: '',
-		phoneValueForm: ''
-	};
+		id: '',
+		name: '',
+		surname: '',
+		phone: ''
+	}
 
 	onFormSubmit = (e) => {
 		e.preventDefault();
 		if (this.validation()) {
-			this.props.onAddNewContact({
-				name: this.state.nameValueForm,
-				surname: this.state.surnameValueForm,
-				phone: this.state.phoneValueForm
+			this.props.getContact({
+				id: this.state.id,
+				name: this.state.name,
+				surname: this.state.surname,
+				phone: this.state.phone
 			});
 			this.closeForm();
 		}
@@ -46,6 +48,7 @@ export default class Modal extends React.Component {
 	disabledButton(e) {
 		e.classList.add('disabled');
 	}
+
 	enabledButton(e) {
 		e.classList.remove('disabled');
 	}
@@ -53,6 +56,7 @@ export default class Modal extends React.Component {
 	makeInvalid(e) {
     e.classList.add('invalid');
 	}
+
 	makeValid(e) {
     e.classList.remove('invalid');
 	}
@@ -73,23 +77,36 @@ export default class Modal extends React.Component {
 
 	onNameInputChange = (e) => {
 		this.setState({ 
-			nameValueForm: e.target.value
+			name: e.target.value
 		});
 		this.validation();
 	}
 
 	onSurnameInputChange = (e) => {
 		this.setState({ 
-			surnameValueForm: e.target.value
+			surname: e.target.value
 		});
 		this.validation();
 	}
 
 	onPhoneInputChange = (e) => {
 		this.setState({ 
-			phoneValueForm: e.target.value
+			phone: e.target.value
 		});
 		this.validation();
+	}
+
+	onEditContact = () => {
+		this.setState({ 
+			id: this.props.idContact,
+			name: this.props.nameContact,
+			surname: this.props.surnameContact,
+			phone: this.props.phoneContact
+		});
+	}
+	
+	componentDidMount() {
+		this.onEditContact();
 	}
 
 	render() {
@@ -99,44 +116,44 @@ export default class Modal extends React.Component {
 					<span className="close" onClick={this.props.handleModal}></span>
 					<h3 className="title title__form">Contact Form</h3>
 					<input
-							autoFocus={true}
-							autoComplete="off"
-							className="input__form"
-							type="text"
-							name="name"
-							placeholder="Name"
-							value={this.state.nameValueForm}
-							onChange={this.onNameInputChange}
-							onFocus={this.onInputFocus}
-							onBlur={this.onInputBlur}
+						autoFocus={true}
+						autoComplete="off"
+						className="input__form"
+						type="text"
+						name="name"
+						placeholder="Name"
+						value={this.state.name}
+						onChange={this.onNameInputChange}
+						onFocus={this.onInputFocus}
+						onBlur={this.onInputBlur}
 					/>
 					<input
-							autoComplete="off"
-							className="input__form"
-							type="text"
-							name="surname"
-							placeholder="Surname"
-							value={this.state.surnameValueForm}
-							onChange={this.onSurnameInputChange}
-							onFocus={this.onInputFocus}
-							onBlur={this.onInputBlur}
+						autoComplete="off"
+						className="input__form"
+						type="text"
+						name="surname"
+						placeholder="Surname"
+						value={this.state.surname}
+						onChange={this.onSurnameInputChange}
+						onFocus={this.onInputFocus}
+						onBlur={this.onInputBlur}
 					/>
 					<input
-							autoComplete="off"
-							className="input__form"
-							type="text"
-							name="phone"
-							placeholder="Phone"
-							value={this.state.phoneValueForm}
-							onChange={this.onPhoneInputChange}
-							onFocus={this.onInputFocus}
-							onBlur={this.onInputBlur}
+						autoComplete="off"
+						className="input__form"
+						type="text"
+						name="phone"
+						placeholder="Phone"
+						value={this.state.phone}
+						onChange={this.onPhoneInputChange}
+						onFocus={this.onInputFocus}
+						onBlur={this.onInputBlur}
 					/>
 					<div className="buttons__block">
 						<button
 							className="btn btn__form btn__form-add disabled"
 							type="submit"
-						>Add Contact
+						>OK
 						</button>
 						<button
 							className="btn btn__form"

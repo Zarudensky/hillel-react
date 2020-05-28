@@ -12,6 +12,23 @@
 .contact:last-child {
   padding: 5px 0 10px;
 }
+.contact.animated {
+  animation: contactAnimated 1.5s;
+}
+@keyframes contactAnimated {
+  0%{
+    background: #32363e;
+    color: #fff;
+  }
+  50%{
+    background: #444b52;
+    color: #60dbfb;
+  }
+  100%{
+    background: #32363e;
+    color: #fff;
+  }
+}
 .contact__block {
   width: 25%;
   padding-left: 20px;

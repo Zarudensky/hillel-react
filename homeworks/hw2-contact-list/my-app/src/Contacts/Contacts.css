@@ -21,3 +21,6 @@
 .btn__add:hover {
 	background: #60dbfb;
 }
+.footer {
+	height: 60px;
+}

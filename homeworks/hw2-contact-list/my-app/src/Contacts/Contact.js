@@ -4,7 +4,7 @@ import './Contact.css';
 export default class Contact extends React.Component {
 	onEditClick = (e) => {
 		e.stopPropagation();
-		this.props.onEdit(this.props.item.id);
+		this.props.onEdit(this.props.item);
 	}
 
 	onDeleteClick = (e) => {
@@ -15,7 +15,7 @@ export default class Contact extends React.Component {
 	render() {
 		const { item } = this.props;
 		return (
-			<div className="contact">
+			<div className="contact animated" id={item.id}>
 				<div className="contact__block contact__name">
 					{item.name}
 				</div>

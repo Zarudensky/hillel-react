@@ -1,7 +1,7 @@
 import React from 'react';
-import './Contact.css';
+import './ContactListItem.css';
 
-export default class Contact extends React.Component {
+export default class ContactListItem extends React.Component {
 	onEditClick = (e) => {
 		e.stopPropagation();
 		this.props.onEdit(this.props.item);
@@ -15,7 +15,7 @@ export default class Contact extends React.Component {
 	render() {
 		const { item } = this.props;
 		return (
-			<div className="contact animated" id={item.id}>
+			<div className={item.class}>
 				<div className="contact__block contact__name">
 					{item.name}
 				</div>

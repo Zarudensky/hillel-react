@@ -1,8 +1,18 @@
 import React from 'react';
 import './ContactList.css';
-import Contact from './Contact';
+import ContactListItem from './ContactListItem';
+
+const titlesClassName = 'titles';
+const titlesClassNameFixed = titlesClassName + ' fixed';
+const contactsClassName = 'contacts';
+const contactsClassNameCorrect = contactsClassName + ' correct';
 
 export default class ContactList extends React.Component {
+	state = {
+		titlesClassName: titlesClassName,
+		contactsClassName: contactsClassName
+	}
+	
 	componentDidMount = () => {
 		window.addEventListener('scroll', this.handleOnScroll)
  	}
@@ -17,11 +27,15 @@ export default class ContactList extends React.Component {
 		const contactsBlock = document.querySelector('.contacts');
 
 		if (windowScroll >= contactsBlock.offsetTop - titlesBlock.offsetHeight) {
-			titlesBlock.classList.add('fixed');
-			contactsBlock.classList.add('correct');
+			this.setState({
+				titlesClassName: titlesClassNameFixed,
+				contactsClassName: contactsClassNameCorrect
+			});
 		} else {
-			titlesBlock.classList.remove('fixed');
-			contactsBlock.classList.remove('correct');
+			this.setState({
+				titlesClassName: titlesClassName,
+				contactsClassName: contactsClassName
+			});
 		}
 	}
 	 
@@ -29,15 +43,18 @@ export default class ContactList extends React.Component {
 		const { contacts, onDelete, onEdit } = this.props;
 		return (
 			<div className="contact__list container">
-				<div className="titles" onScroll={this.handleScroll}>
+				<div 
+					className={this.state.titlesClassName} 
+					onScroll={this.handleScroll}
+				>
 					<h2 className="title">Name</h2>
 					<h2 className="title">Surname</h2>
 					<h2 className="title">Phone</h2>
 					<h2 className="title">Actions</h2>
 				</div>
-				<div className="contacts">
+				<div className={this.state.contactsClassName}>
 					{contacts.map((item) => (
-						<Contact
+						<ContactListItem
 							key={item.id}
 							item={item}
 							onDelete={onDelete}

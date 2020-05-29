@@ -1,97 +1,131 @@
 import React from 'react';
 import './Modal.css';
 
+const inputClassName = 'input__form';
+const inputClassNameInValid = inputClassName + ' invalid';
+const buttonClassName = 'btn btn__form';
+const buttonClassNameDisabled = buttonClassName + ' disabled';
+
 export default class Modal extends React.Component {
 	state = {
-		id: '',
-		name: '',
-		surname: '',
-		phone: ''
+		contact: { id: '', name: '', surname: '', phone: '' },
+		nameClassName: inputClassName,
+		surnameClassName: inputClassName,
+		phoneClassName: inputClassName,
+		buttonClassName: buttonClassNameDisabled
 	}
 
 	onFormSubmit = (e) => {
 		e.preventDefault();
-		if (this.validation()) {
-			this.props.getContact({
+    if (this.validation()) {
+      this.props.saveContact({
 				id: this.state.id,
 				name: this.state.name,
 				surname: this.state.surname,
-				phone: this.state.phone
+				phone: this.state.phone,
+				class: 'contact animated'
 			});
-			this.closeForm();
-		}
+
+      this.closeModal();
+    }
 	};
 
 	validation() {
-		const inputContact = document.querySelectorAll('.input__form');
-		const buttonAdd = document.querySelector('.btn__form-add');
-
 		let valid = true;
 
-    for (let i = 0; i < inputContact.length; i++) {
-			if (!this.validate(inputContact[i].value)) {
-				this.makeInvalid(inputContact[i]);
-				this.disabledButton(buttonAdd);
-				valid = false;
-			} else {
-				this.enabledButton(buttonAdd);
-				valid = true;
-			}
+		if (!this.validateAllInputs()) {
+			valid = false;
+			this.disabledButton();
+		} else {
+			this.enabledButton();
 		}
+
 		return valid;
 	}
 
-	validate(value) {
-    return !!value.trim();
+	validateAllInputs = () => {
+		if (!this.state.name || !this.state.surname || !this.state.phone) {
+			return false;
+		}
+
+    return true;
 	}
 
-	disabledButton(e) {
-		e.classList.add('disabled');
+	validateName = () => {
+		if (!this.state.name) {
+			this.setState({
+				nameClassName: inputClassNameInValid
+			});
+		}
 	}
 
-	enabledButton(e) {
-		e.classList.remove('disabled');
+	validateSurname = () => {
+		if (!this.state.surname) {
+			this.setState({
+				surnameClassName: inputClassNameInValid
+			});
+		}
+	}
+	
+	validatePhone = () => {
+		if (!this.state.phone) {
+			this.setState({
+				phoneClassName: inputClassNameInValid
+			});
+		}
 	}
 
-	makeInvalid(e) {
-    e.classList.add('invalid');
+	disabledButton() {
+		this.setState({
+			buttonClassName: buttonClassNameDisabled
+		});
 	}
 
-	makeValid(e) {
-    e.classList.remove('invalid');
+	enabledButton() {
+		this.setState({
+			buttonClassName: buttonClassName
+		});
 	}
 
-	onInputFocus = (e) => {
-		this.makeValid(e.target);
-	}
-
-	onInputBlur = (e) => {
-    if (!this.validate(e.target.value)) {
-			this.makeInvalid(e.target);
-    }
-	}
-
-	closeForm() {
+	closeModal() {
 		this.props.handleModal();
+	}
+
+	onNameInputFocus = () => {
+		this.setState({
+			nameClassName: inputClassName
+		});
+	}
+
+	onSurnameInputFocus = () => {
+		this.setState({
+			surnameClassName: inputClassName
+		});
+	}
+
+	onPhoneInputFocus = () => {
+		this.setState({
+			phoneClassName: inputClassName
+		});
 	}
 
 	onNameInputChange = (e) => {
 		this.setState({ 
-			name: e.target.value
+			name: e.target.value,
 		});
 		this.validation();
 	}
 
 	onSurnameInputChange = (e) => {
 		this.setState({ 
-			surname: e.target.value
+			surname: e.target.value,
 		});
 		this.validation();
 	}
 
 	onPhoneInputChange = (e) => {
 		this.setState({ 
-			phone: e.target.value
+			phone: e.target.value,
 		});
 		this.validation();
 	}
@@ -118,40 +152,43 @@ export default class Modal extends React.Component {
 					<input
 						autoFocus={true}
 						autoComplete="off"
-						className="input__form"
+						className={this.state.nameClassName}
 						type="text"
 						name="name"
 						placeholder="Name"
-						value={this.state.name}
+						defaultValue={this.state.name}
 						onChange={this.onNameInputChange}
-						onFocus={this.onInputFocus}
-						onBlur={this.onInputBlur}
+						onFocus={this.onNameInputFocus}
+						onBlur={this.validateName}
 					/>
+					<div style={{ fontSize: 12, color: "red" }}>
+            {this.state.nameError}
+          </div>
 					<input
 						autoComplete="off"
-						className="input__form"
+						className={this.state.surnameClassName}
 						type="text"
 						name="surname"
 						placeholder="Surname"
-						value={this.state.surname}
+						defaultValue={this.state.surname}
 						onChange={this.onSurnameInputChange}
-						onFocus={this.onInputFocus}
-						onBlur={this.onInputBlur}
+						onFocus={this.onSurnameInputFocus}
+						onBlur={this.validateSurname}
 					/>
 					<input
 						autoComplete="off"
-						className="input__form"
+						className={this.state.phoneClassName}
 						type="text"
 						name="phone"
 						placeholder="Phone"
-						value={this.state.phone}
+						defaultValue={this.state.phone}
 						onChange={this.onPhoneInputChange}
-						onFocus={this.onInputFocus}
-						onBlur={this.onInputBlur}
+						onFocus={this.onPhoneInputFocus}
+						onBlur={this.validatePhone}
 					/>
 					<div className="buttons__block">
 						<button
-							className="btn btn__form btn__form-add disabled"
+							className={this.state.buttonClassName}
 							type="submit"
 						>OK
 						</button>

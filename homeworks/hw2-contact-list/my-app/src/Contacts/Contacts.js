@@ -103,7 +103,6 @@ export default class Contacts extends React.Component {
 							nameContact={this.state.nameContact}
 							surnameContact={this.state.surnameContact}
 							phoneContact={this.state.phoneContact}
-							onEdit={this.onEdit}
 						/>
 					}
 				</div>

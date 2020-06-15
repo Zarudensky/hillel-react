@@ -1,0 +1,36 @@
+.contact__form {
+  display: flex;
+  flex-direction: column;
+  width: calc(30% - 80px);
+  padding: 40px;
+  background: #20232a;
+}
+.title__form {
+  text-align: center;
+  padding: 0;
+  margin: 0 auto 20px;
+  color: #60dbfb;
+  font-size: 24px;
+}
+.input__form {
+  height: 35px;
+  padding: 0 10px;
+  border: 1px solid #fff;
+  margin-bottom: 20px;
+  font-size: 16px;
+  outline: none;
+}
+.input__form:focus {
+  border-color: #60dbfb;
+  box-shadow: inset 0px 0px 5px #60dbfb;
+}
+.input__form.invalid {
+  border-color: #cc2626;
+  box-shadow: inset 0px 0px 5px #CC3333;
+}
+.btn__save {
+  margin-bottom: 20px;
+}
+.btn__save:disabled {
+  background: #ddd;
+}

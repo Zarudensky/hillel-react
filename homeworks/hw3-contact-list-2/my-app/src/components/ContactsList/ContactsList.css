@@ -1,0 +1,23 @@
+.title__main {
+  font-size: 34px;
+  color: #60dbfb;
+  padding: 0;
+  margin: 40px 0 0 40px;
+}
+.contacts__container {
+  display: flex;
+  width: calc(100% - 80px);
+	max-width: 1200px;
+	padding: 40px 40px 80px;
+	margin: 0 auto;
+}
+.contacts {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  background: #32363e;
+}
+.btn__add {
+  width: 300px;
+  margin: 50px auto;
+}

@@ -1,4 +1,4 @@
-import React, { Component } from './node_modules/react';
+import React, { Component } from 'react';
 
 import ContactsList from '../ContactsList/ContactsList';
 import ContactForm from '../ContactForm/ContactForm';
@@ -18,8 +18,8 @@ export default class Contacts extends Component {
     };
 
     componentDidMount() {
-        contactsService.getContacts().then((contacts) => {
-            this.setState({ contacts });
+        contactsService.get().then(({ data }) => {
+            this.setState({ contacts: data });
         });
     }
 
@@ -40,7 +40,7 @@ export default class Contacts extends Component {
     };
 
     onDelete = (contact) => {
-        contactsService.deleteContact(contact.id);
+        contactsService.delete(contact.id);
         this.setState({
             contacts: this.state.contacts.filter((el) => el.id !== contact.id),
             selectedContact: this.getEmptyContact(),
@@ -56,16 +56,16 @@ export default class Contacts extends Component {
     };
 
     createContact(contact) {
-        contactsService.addContact(contact).then((newContact) => {
+        contactsService.post('', contact).then(({ data }) => {
             this.setState({
-                contacts: [...this.state.contacts, newContact],
-                selectedContact: newContact,
+                contacts: [...this.state.contacts, data],
+                selectedContact: data,
             });
         });
     }
 
     updateContact(contact) {
-        contactsService.updateContact(contact).then(() => {
+        contactsService.put(contact.id, contact).then(() => {
             this.setState({
                 contacts: this.state.contacts.map((el) =>
                     el.id === contact.id ? contact : el

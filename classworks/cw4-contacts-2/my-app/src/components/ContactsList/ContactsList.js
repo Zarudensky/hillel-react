@@ -1,5 +1,5 @@
-import React, { Component } from './node_modules/react';
-import './contactsList.css';
+import React, { Component } from 'react';
+import './ContactsList.css';
 
 import ContactsListItem from '../ContactsListItem/ContactsListItem';
 

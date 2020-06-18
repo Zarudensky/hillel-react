@@ -1,6 +1,5 @@
-import React, { Component } from './node_modules/react';
-
-import './contactForm.css';
+import React, { Component } from 'react';
+import './ContactForm.css';
 
 export class ContactForm extends Component {
     constructor(props) {
@@ -37,7 +36,7 @@ export class ContactForm extends Component {
       this.setState({
           [e.target.name]: e.target.value,
       });
-  };
+    };
 
     render() {
         console.log('form render', this.props);

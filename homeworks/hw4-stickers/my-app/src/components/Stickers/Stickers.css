@@ -1,0 +1,8 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  background: #343434;
+}
+.stickers {
+  background: #245;
+}

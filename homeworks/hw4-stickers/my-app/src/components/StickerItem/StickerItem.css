@@ -1,0 +1,20 @@
+.sticker {
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  padding: 20px;
+  margin-bottom: 20px;
+  background: #678;
+}
+.sticker__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+textarea {
+  width: calc(100% - 20px);
+  min-width: 240px;
+  height: 200px;
+  min-height: 100px;
+  padding: 5px 10px;
+}

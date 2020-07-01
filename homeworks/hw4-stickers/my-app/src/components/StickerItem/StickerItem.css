@@ -4,7 +4,7 @@
   width: max-content;
   padding: 20px;
   margin-bottom: 20px;
-  background: #678;
+  background: #385b7ded;
 }
 .sticker__header {
   display: flex;
@@ -17,4 +17,10 @@ textarea {
   height: 200px;
   min-height: 100px;
   padding: 5px 10px;
+}
+.btn__drag {
+  cursor: all-scroll;
+}
+.btn__delete {
+  cursor: pointer;
 }

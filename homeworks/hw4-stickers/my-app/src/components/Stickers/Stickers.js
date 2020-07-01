@@ -3,36 +3,51 @@ import StickerItem from '../StickerItem/StickerItem';
 import api from '../../api';
 import './Stickers.css';
 
+const EMPTY_STICKER = {
+  description: '',
+  x: 20,
+  y: 100,
+};
+
 function Stickers() {
   const [stickerItems, setStickerItems,] = useState([]);
-  const [description, setDescription] = useState('');
 
   useEffect(() => {
     api.get().then(({ data }) => setStickerItems(data));
   }, []);
 
-  function onDelete(item) {
-    api.delete(item.id).then(({ data }) => setStickerItems(
-      stickerItems.filter((item) => item.id !== data.id)
-      )
-    )
+  function onDelete(sticker) {
+    api.delete(sticker.id).then(() => {
+      setStickerItems(stickerItems.filter((el) => el !== sticker));
+    });
   }
 
   function onAddSticker() {
-    api.post('', {description: ''}).then(({ data }) => setStickerItems([...stickerItems, data]));
+    api.post('', EMPTY_STICKER).then(({ data }) => setStickerItems([...stickerItems, data]));
   }
-  // function onDescriptionChange(e) {
-  //     setDescription(e.target.value);
-  // }
 
-  // function onSave() {
-  //     api.post('', {
-  //         description,
-  //         isDone: false,
-  //     }).then(({ data }) => setStickerItems([...todoItems, data]));
+  function changeSticker(id, updatedData) {
+    console.log('changeSticker');
+    console.log(id);
+    console.log(updatedData);
+    let sticker = stickerItems.find((el) => el.id === id);
+    console.log(sticker);
+    sticker = {
+      ...sticker,
+      ...updatedData,
+    };
 
-  //     setDescription('');
-  // }
+    const newStickers = stickerItems.map((el) =>
+      el.id === sticker.id ? sticker : el
+    );
+    setStickerItems(newStickers);
+  }
+
+  function saveSticker(id) {
+    const sticker = stickerItems.find((el) => el.id === id);
+
+    api.put(id, sticker);
+  }
 
   return (
     <>
@@ -41,8 +56,14 @@ function Stickers() {
         <button className="btn btn__add" onClick={onAddSticker}>Add Sticker</button>
       </div>
       <div className="stickers">
-        {stickerItems.map((item) => (
-          <StickerItem key={item.id} item={item} onDelete ={onDelete} />
+        {stickerItems.map((sticker) => (
+          <StickerItem 
+            key={sticker.id}
+            sticker={sticker}
+            onDelete={onDelete}
+            onChange={changeSticker}
+            onSave={saveSticker}
+          />
         ))}
       </div>
     </>

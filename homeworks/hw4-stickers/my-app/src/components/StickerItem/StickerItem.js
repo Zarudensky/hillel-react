@@ -11,7 +11,7 @@ function StickerItem({ sticker, onChange, onDelete, onSave }) {
   }
   
   function onValueChange(e) {
-    onChange(sticker.id,  e.target.value );
+    onChange(sticker.id, { [e.target.name]: e.target.value });
   }
 
   function getStickerStyle() {

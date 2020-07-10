@@ -1,0 +1,14 @@
+.contacts {
+  width: 100%;
+  background: #32363e;
+}
+.titles {
+  display: flex;
+  width: 100%;
+	height: 60px;
+	background: #20232a;
+}
+.titles .title {
+	width: 25%;
+	font-size: 20px;
+}

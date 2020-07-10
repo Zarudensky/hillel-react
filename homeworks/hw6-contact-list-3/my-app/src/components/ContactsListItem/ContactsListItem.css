@@ -1,0 +1,17 @@
+.contact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 0;
+}
+.contact__block {
+  width: 25%;
+  padding-left: 20px;
+}
+.contact__actions {
+  display: flex;
+  justify-content: space-between;
+}
+.btn__delete, .btn__edit {
+  width: calc(50% - 10px);
+}

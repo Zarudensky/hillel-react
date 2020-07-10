@@ -1,0 +1,18 @@
+.contacts__container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.btn__add {
+  position: absolute;
+  top: -70px;
+  right: 0;
+  width: calc(25% - 20px);
+}
+.btn.btn__add {
+  background: #fff;
+}
+.btn.btn__add:hover {
+  background: #60dbfb;
+}
